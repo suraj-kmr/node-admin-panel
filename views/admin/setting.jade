@@ -1,0 +1,64 @@
+extends master
+
+block content
+
+    div(class="content")
+        div(class="container-fluid")
+            div(class="row")
+                div(class="col-md-12")
+                    div(class="card")
+                        div(class="card-header card-header-primary")
+                            h4(class="card-title") Site Settings
+                            p(class="card-category") Update common site settings
+
+                        div(class="card-body")
+                            form(action="/admin/save-setting" method="post" enctype="multipart/form-data") 
+                                if (error.length > 0) 
+                                    div.alert(class='alert-danger alert-dismissible')
+                                        a(href="#" class="close" data-dismiss="alert" aria-label="close") &times; 
+                                        p= error 
+                                if (success.length > 0) 
+                                    div.alert(class='alert-success alert-dismissible')
+                                        a(href="#" class="close" data-dismiss="alert" aria-label="close") &times; 
+                                        p= success 
+                                div(class="row")
+                                    div(class="col-md-6")
+                                        div(class="form-grou")
+                                            label(class="bmd-label-floating") Logo
+                                            input(type="file" class="form-upload" name="logo")
+                                        //- div(class="file-upload mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent")
+                                            span BROWSE
+                                            input(type="file" name="FileAttachment" id="FileAttachment" class="upload")
+                                        //- input(type="text" id="fileuploadurl" readonly placeholder="Maximum file size is 1GB")
+                                div(class="row")
+                                    div(class="col-md-12")
+                                        div(class="form-group")
+                                            label(class="bmd-label-floating") Title
+                                            input(type="text" class="form-control" name="title" value=result[1].key_value)
+
+                                div(class="row")
+                                    div(class="col-md-12")
+                                        div(class="form-group")
+                                            label About Us
+                                            div(class="form-group")
+                                                //- label(class="bmd-label-floating") Write about the websites.
+                                                textarea(class="form-control" name="about_us" id="editor" rows="5")= result[2].key_value
+
+                                div(class="row")
+                                    div(class="col-md-12")
+                                        div(class="form-group")
+                                            label Privacy Policy
+                                            div(class="form-group")
+                                                //- label(class="bmd-label-floating") Write about the websites.
+                                                textarea(class="form-control" name="privacy" id="editor" rows="5")= result[3].key_value
+
+                                div(class="row")
+                                    div(class="col-md-12")
+                                        div(class="form-group")
+                                            label TErms and Conditions
+                                            div(class="form-group")
+                                                //- label(class="bmd-label-floating") Write about the websites.
+                                                textarea(class="form-control" name="term_conditions" id="editor" rows="5")= result[4].key_value
+
+                                button(type="submit" class="btn btn-primary pull-right") Save Setting
+                                div(class="clearfix")
